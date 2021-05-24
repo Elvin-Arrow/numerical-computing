@@ -7,28 +7,32 @@ def f(x):
 
 
 def trapm(h, n):
-    sum = f(0)
-    print(sum)
+    temp = a
+    sum = 0
+
     for i in range(1, n):
-        sum += 2 * f(i)
+        temp += h
+        sum = sum + f(temp)
 
-    sum += f(n)
+    i = (b - a) * (f(a) + (2 * sum) + f(b)) / (2 * n)
 
-    print(sum)
+    return round(i, 4)
 
-    i = h * (sum / 2)
 
-    return i
+def epsillon_a(estimate):
+    percentage = ((val - estimate) / val) * 100
+    return round(percentage, 2)
 
 
 a = 0
 b = 0.8
-
-table = [['n', 'h', 'i']]
+val = 1.640533
+table = [['n', 'h', 'i', 'Et(%)']]
 
 for n in range(2, 11):
     h = (a + b) / n
     i = trapm(h, n)
-    table.append([n, h, i])
+
+    table.append([n, round(h, 4), i, epsillon_a(i)])
 
 print(tabulate(table))
